@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Embodied Interaction in the Age of Disembodied Intelligence · Workshop proposal</title>
+<meta name="description" content="Workshop proposal for ACM CHI 2027 on the future role of embodiment in human-AI interaction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0C0F0A;
+  --muted: #4F534C;
+  --paper: #FFFFFF;
+  --line: #E2E3E0;
+  --body: #FF206E;      /* embodied: physiological signal */
+  --token: #41EAD4;     /* disembodied: language tokens */
+  --night: #0C0F0A;
+  --night-ink: #FFFFFF;
+  --question: #FBFF12;   /* the open question: re-coupling */
+  --display: "Libre Franklin", "Franklin Gothic Medium", "Franklin Gothic", Arial, sans-serif;
+  --serif: var(--display);
+  --measure: 68ch;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(4rem + env(safe-area-inset-top, 0px)); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--serif); font-size: 1.0625rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration-color: var(--body); text-underline-offset: .18em; text-decoration-thickness: .08em; }
+a:hover { color: var(--body); }
+:focus-visible { outline: 3px solid var(--body); outline-offset: 3px; border-radius: 2px; }
+img { max-width: 100%; }
+
+/* Navigation */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: rgba(12, 15, 10, .94); backdrop-filter: blur(8px);
+  color: var(--night-ink); font-family: var(--display); font-size: .95rem;
+}
+.nav-inner { max-width: 72rem; margin: 0 auto; padding: .8rem 1.5rem; display: flex; gap: 2rem; align-items: center; }
+.nav-brand { font-weight: 700; white-space: nowrap; text-decoration: none; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.4rem; overflow-x: auto; scrollbar-width: none; }
+.nav ul::-webkit-scrollbar { display: none; }
+.nav li a { text-decoration: none; opacity: .8; white-space: nowrap; }
+.nav li a:hover { opacity: 1; color: #fff; }
+
+/* Hero */
+.hero { background: var(--night); color: var(--night-ink); position: relative; overflow: hidden; }
+.hero-inner { max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; position: relative; z-index: 1; }
+.hero-meta { font-family: var(--display); font-size: 1.05rem; color: var(--question); margin: 0 0 1.25rem; }
+.hero h1 {
+  font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1.02; letter-spacing: -.025em; margin: 0; max-width: 21ch;
+}
+.hero-lede { max-width: 58ch; font-size: 1.2rem; color: rgba(255,255,255,.82); margin: 1.6rem 0 2rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+.btn {
+  font-family: var(--display); font-weight: 600; font-size: 1rem; text-decoration: none;
+  padding: .7rem 1.2rem; border-radius: 999px; border: 1.5px solid currentColor;
+}
+.btn-primary { background: var(--question); border-color: var(--question); color: var(--ink); }
+.btn-primary:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.btn-ghost:hover { color: #fff; background: rgba(255,255,255,.08); }
+.trajectory { max-width: 72rem; margin: 3rem auto 0; padding: 0 1.5rem 2rem; }
+.trajectory-scroll { overflow-x: auto; }
+.trajectory svg { display: block; width: 100%; min-width: 680px; height: auto; font-family: var(--display); }
+.trajectory figcaption { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-top: .9rem; font-family: var(--display); font-size: .92rem; color: rgba(255,255,255,.66); }
+.trajectory figcaption .key::before { content: ""; display: inline-block; width: 1.4em; height: 3px; border-radius: 2px; margin-right: .5em; vertical-align: .25em; }
+.trajectory .k-body::before { background: var(--body); }
+.trajectory .k-token::before { background: var(--token); }
+.trajectory .k-future::before { background: repeating-linear-gradient(90deg, rgba(255,255,255,.8) 0 5px, transparent 5px 9px); }
+.trajectory .conceptual { margin-left: auto; font-style: italic; }
+
+/* Sections */
+main section { padding: 5rem 1.5rem; border-bottom: 1px solid var(--line); }
+.wrap { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 3rem; }
+.wrap > h2 {
+  font-family: var(--display); font-weight: 700; font-size: 1.7rem; line-height: 1.15;
+  letter-spacing: -.01em; margin: 0; position: sticky; top: 5.5rem; align-self: start;
+}
+.prose { max-width: var(--measure); }
+.prose p { margin: 0 0 1.1em; }
+.prose h3 { font-family: var(--display); font-weight: 600; font-size: 1.25rem; margin: 2rem 0 .6rem; }
+.prose h3:first-child { margin-top: 0; }
+
+/* Three forces */
+.forces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2.2rem 0 1.6rem; }
+.force figure { margin: 0 0 .8rem; background: var(--night); border-radius: 12px; padding: .6rem; }
+.force svg { width: 100%; height: auto; display: block; }
+.force h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 .3rem; }
+.force p { font-size: .98rem; line-height: 1.5; color: var(--muted); margin: 0 0 .6rem; }
+.effect { display: inline-block; font-family: var(--display); font-size: .88rem; font-weight: 600; padding: .15rem .6rem; border-radius: 999px; }
+.effect.up { color: var(--ink); background: var(--token); }
+.effect.down { color: var(--ink); background: var(--body); }
+
+/* Themes */
+.themes { margin: 0; display: grid; grid-template-columns: 13rem minmax(0, 1fr); max-width: 52rem; }
+.themes dt, .themes dd { padding: 1.1rem 0; border-top: 1px solid var(--line); margin: 0; }
+.themes dt { font-family: var(--display); font-weight: 600; padding-right: 1.5rem; }
+.themes dd { color: var(--ink); }
+
+/* Dates and schedule */
+.timeline { list-style: none; margin: 0; padding: 0; max-width: 40rem; }
+.timeline li { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--line); }
+.timeline time, .timeline .when { font-family: var(--display); font-weight: 600; font-variant-numeric: tabular-nums; }
+.tba { color: var(--muted); font-weight: 400; }
+.schedule { width: 100%; max-width: 48rem; border-collapse: collapse; }
+.schedule th, .schedule td { text-align: left; vertical-align: top; padding: 1rem 1rem 1rem 0; border-top: 1px solid var(--line); }
+.schedule th { font-family: var(--display); font-weight: 600; white-space: nowrap; width: 8.5rem; font-variant-numeric: tabular-nums; }
+.schedule td h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 .25rem; }
+.schedule td p { margin: 0; color: var(--muted); font-size: 1rem; }
+.schedule tr.pause td, .schedule tr.pause th { color: var(--muted); font-weight: 400; font-style: italic; }
+.note { font-size: .95rem; color: var(--muted); margin-top: 1.2rem; }
+.table-scroll { overflow-x: auto; }
+
+/* Organizers */
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 2.5rem 2rem; }
+.person .photo {
+  width: 7.5rem; height: 7.5rem; border-radius: 50%; position: relative; overflow: hidden;
+  display: grid; place-items: center; margin-bottom: 1rem;
+  font-family: var(--display); font-weight: 800; font-size: 2rem; color: var(--ink);
+  background: var(--body);
+}
+.person:nth-of-type(3n+2) .photo { background: var(--token); }
+.person:nth-of-type(3n) .photo { background: var(--question); }
+.person .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.person h3 { font-family: var(--display); font-size: 1.15rem; margin: 0; }
+.person .aff { font-family: var(--display); font-size: .95rem; color: var(--muted); margin: .15rem 0 .7rem; }
+.person p { font-size: 1rem; line-height: 1.55; margin: 0; }
+
+.empty { border: 1.5px dashed var(--line); border-radius: 10px; padding: 1.5rem; max-width: 40rem; color: var(--muted); }
+.empty p { margin: 0; }
+
+footer { background: var(--night); color: rgba(255,255,255,.7); font-family: var(--display); font-size: .95rem; padding: 2.5rem 1.5rem; }
+footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+@media (max-width: 820px) {
+  .wrap { grid-template-columns: 1fr; gap: 1.5rem; }
+  .wrap > h2 { position: static; }
+  .forces { grid-template-columns: 1fr; }
+  .themes { grid-template-columns: 1fr; }
+  .themes dd { border-top: 0; padding-top: 0; }
+  .timeline li { grid-template-columns: 1fr; gap: .1rem; }
+  main section { padding: 3.5rem 1.25rem; }
+  .hero-inner { padding-top: 3.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .trajectory svg * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">Workshop proposal</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#call">Call for papers</a></li>
+      <li><a href="#dates">Dates</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <!-- <p class="hero-meta">ACM CHI 2027 workshop, Pittsburgh, USA, May 2027 (exact day TBA)</p> -->
+    <p class="hero-meta">A workshop proposal for ACM CHI 2027</p>
+    <h1>The Future of Embodied Interaction in the Age of Disembodied Intelligence</h1>
+    <p class="hero-lede">Humans remain embodied while AI becomes increasingly disembodied. We bring together researchers from HCI, affective and physiological computing, embodied cognition, neuroscience, and AI to set a research agenda for what this means for future interfaces.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#call">Read the call for papers</a>
+      <a class="btn btn-ghost" href="proposal.pdf">Workshop proposal (PDF)</a>
+    </div>
+  </div>
+  <figure class="trajectory">
+    <div class="trajectory-scroll">
+      <svg id="trajectory" viewBox="0 0 1100 345" role="img" aria-labelledby="traj-title traj-desc">
+        <title id="traj-title">Two diverging trajectories of computing</title>
+        <desc id="traj-desc">Conceptual illustration. From mainframes to wearables, both cognitive support and embodiment increased, with embodiment rising fastest through wearable and physiological sensing. With LLM assistants, cognitive support (memory, reasoning, creativity, decision making) jumps sharply while embodiment (perception, action, physiology, emotion) falls back, opening a gap labelled decoupling, where questions of trust, empathy, and agency arise. Dashed lines into the future ask whether the two can be re-coupled into embodied human-AI symbiosis, which is the workshop's question.</desc>
+      </svg>
+    </div>
+    <figcaption>
+      <span class="key k-future">Open question</span>
+      <span class="conceptual">Conceptual illustration, not data</span>
+    </figcaption>
+  </figure>
+</header>
+
+<main>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About the workshop</h2>
+    <div class="prose">
+      <p>For decades, human-computer interaction has been driven by three complementary forces. Large Language Models accelerate two of them while stepping back from the third.</p>
+
+      <div class="forces">
+        <div class="force">
+          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person whose thoughts, shown as nodes in the head, are linked by strong connections to an AI system that extends their reasoning.">
+  <circle cx="55" cy="50" r="14" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><path d="M25 120 C25 60 85 60 85 120" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="49" cy="46" r="3" fill="#41EAD4"/><circle cx="60" cy="44" r="3" fill="#41EAD4"/><circle cx="55" cy="56" r="3" fill="#41EAD4"/>
+  <path d="M49 46 L60 44 L55 56 Z" fill="none" stroke="#41EAD4" stroke-width="1.2"/>
+  <path d="M60 44 C100 20 140 30 172 50" fill="none" stroke="#41EAD4" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M55 56 C100 70 140 76 172 78" fill="none" stroke="#41EAD4" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M60 44 C105 45 140 60 172 64" fill="none" stroke="#41EAD4" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+  <rect x="172" y="36" width="50" height="58" rx="10" fill="rgba(65,234,212,.18)" stroke="#41EAD4" stroke-width="2"/><rect x="182" y="48" width="30" height="5" rx="2" fill="#41EAD4"/><rect x="182" y="59" width="22" height="5" rx="2" fill="#41EAD4"/><rect x="182" y="70" width="26" height="5" rx="2" fill="#41EAD4"/><rect x="182" y="81" width="16" height="5" rx="2" fill="#41EAD4"/>
+  <text x="197" y="118" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">AI</text>
+</svg></figure>
+          <h3>Cognitive support</h3>
+          <p>Technology augments memory, reasoning, creativity, and decision making.</p>
+          <span class="effect up">LLMs accelerate this</span>
+        </div>
+        <div class="force">
+          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person emitting bodily signals such as heartbeat and brain activity. The signals travel toward an AI system but fade out and break off before reaching it.">
+  <defs><linearGradient id="fadeRose" x1="0" x2="1"><stop offset="0" stop-color="#FF206E"/><stop offset=".65" stop-color="#FF206E"/><stop offset="1" stop-color="#FF206E" stop-opacity="0"/></linearGradient></defs>
+  <circle cx="55" cy="50" r="14" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><path d="M25 120 C25 60 85 60 85 120" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M55 96 c-6 -6 -12 -1 -7 5 l7 7 l7 -7 c5 -6 -1 -11 -7 -5 z" fill="#FF206E"/>
+  <path d="M74 38 a14 14 0 0 1 0 24 M80 32 a22 22 0 0 1 0 36" fill="none" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
+  <path d="M68 102 H84 L89 90 L95 114 L101 96 L105 102 H150" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M90 50 C110 50 125 56 145 60" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <path d="M154 52 l10 10 M164 52 l-10 10 M154 96 l10 10 M164 96 l-10 10" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
+  <rect x="178" y="36" width="46" height="58" rx="10" fill="rgba(65,234,212,.18)" stroke="#41EAD4" stroke-width="2"/><rect x="188" y="48" width="30" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="59" width="22" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="70" width="26" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="81" width="16" height="5" rx="2" fill="#41EAD4"/>
+  <text x="201" y="118" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">AI</text>
+</svg></figure>
+          <h3>Embodiment</h3>
+          <p>Interfaces move closer to perception, action, physiology, and emotion.</p>
+          <span class="effect down">LLMs step back from this</span>
+        </div>
+        <div class="force">
+          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person at the centre of concentric rings. A desktop computer sits on the outer ring as an external tool, and an AI assistant has moved to the innermost ring as a continuous partner.">
+  <defs><marker id="arrowBlue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#41EAD4"/></marker></defs>
+  <circle cx="120" cy="72" r="64" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-dasharray="3 5"/>
+  <circle cx="120" cy="72" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-dasharray="3 5"/>
+  <circle cx="120" cy="62" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+  <path d="M103 90 C103 72 137 72 137 90" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  <g opacity=".55"><rect x="42" y="30" width="26" height="18" rx="2" fill="#0C0F0A" stroke="rgba(255,255,255,.7)" stroke-width="1.8"/><path d="M55 48 v5 M49 54 h12" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round"/></g>
+  <path d="M70 44 C95 30 140 22 150 38" fill="none" stroke="#41EAD4" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowBlue)"/>
+  <path d="M146 48 h26 v16 h-14 l-6 6 v-6 h-6 z" fill="rgba(65,234,212,.22)" stroke="#41EAD4" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M152 56 h14" stroke="#41EAD4" stroke-width="2" stroke-linecap="round"/>
+  <text x="55" y="68" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">tool</text>
+  <text x="190" y="94" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">partner</text>
+</svg></figure>
+          <h3>Integration</h3>
+          <p>Computers turn from external tools into continuous partners in everyday life.</p>
+          <span class="effect up">LLMs accelerate this</span>
+        </div>
+      </div>
+
+      <p>Whereas wearables enabled embodied interaction and made physiological signals accessible, today's LLMs have largely retreated to disembodied interfaces. Interacting with disembodied systems is not new in itself. What is new is that these systems now take part in communication, learning, emotional support, and decision making in ways that appear almost human-like, while having no body and only limited access to the <em>Umwelt</em> that grounds human experience.</p>
+      <p>The resulting decoupling of intelligence from embodiment raises fundamental questions about cognition, emotion, empathy, trust, agency, and human-AI interaction. It is no longer a theoretical concern but a daily experience for millions of users. This workshop aims to establish an interdisciplinary research agenda that defines the theoretical foundations, design principles, and technological opportunities for embodied interaction in the age of disembodied intelligence.</p>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="wrap">
+    <h2>Themes and open questions</h2>
+    <dl class="themes">
+      <dt>Disembodied intelligence</dt>
+      <dd>How much intelligence, social understanding, and emotional competence can emerge without embodiment?</dd>
+      <dt>Embodied residue</dt>
+      <dd>To what extent can LLMs induce a latent world model of physically embodied reality purely from human-generated text?</dd>
+      <dt>Cognitive decoupling</dt>
+      <dd>What are the scientific implications of separating intelligence from physiology and sensorimotor experience?</dd>
+      <dt>Extended cognition</dt>
+      <dd>How should cognition be understood when it is distributed across embodied humans and intelligent artificial systems?</dd>
+      <dt>Interactive language</dt>
+      <dd>How does cognition change when language no longer only serves communication but actively participates in reasoning and reflection?</dd>
+      <dt>Embodied bottlenecks</dt>
+      <dd>Can physiological, affective, and behavioral interfaces help people manage cognitive overload, trust calibration, and agency when interacting with multiple AI systems?</dd>
+      <dt>Human-AI symbiosis</dt>
+      <dd>What principles should guide the design of systems in which cognition is shared between embodied humans and disembodied intelligent agents?</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="call">
+  <div class="wrap">
+    <h2>Call for papers</h2>
+    <div class="prose">
+      <p class="note" style="margin-top:0">This workshop is currently a proposal. The call below will open if the workshop is accepted.</p>
+      <!-- <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a one-day workshop at ACM CHI 2027. [...]</p> -->
+      <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a one-day workshop. We welcome participants from HCI, affective and physiological computing, psychology, neuroscience, data science, mixed reality, robotics, philosophy of mind, and digital ethics.</p>
+
+      <h3>What to submit</h3>
+      <p>Position papers or case studies of 4 to 8 pages that present a project or articulate a challenge related to the workshop themes. Alternatively, you may submit a previously published paper that raises relevant questions, accompanied by a short statement of how it relates to the workshop.</p>
+
+      <h3>How to submit</h3>
+      <p>Submissions use the <a href="https://ceur-ws.org/HOWTOSUBMIT.html#PREPARE">CEUR Workshop Proceedings template</a>, must follow the <a href="https://www.acm.org/publications/authors/submissions">ACM accessibility guidelines</a>, and are submitted via <a href="#">EasyChair</a>. Submissions are selected by the organizing committee based on quality and contribution to the workshop themes, with a particular focus on novel interaction paradigms with AI.</p>
+
+      <h3>Publication</h3>
+      <p>Accepted papers will be published in the workshop proceedings on <a href="https://ceur-ws.org/">CEUR-WS.org</a>. With the authors' consent, accepted papers will also be available on this website two weeks before the conference.</p>
+
+      <h3>Attendance</h3>
+      <p>At least one author of each accepted submission must register for the workshop and the host conference and attend the workshop in person.</p>
+    </div>
+  </div>
+</section>
+
+<section id="dates">
+  <div class="wrap">
+    <h2>Important dates</h2>
+    <div>
+      <ol class="timeline">
+        <li><span class="when">Submission deadline</span><span class="tba">TBA</span></li>
+        <li><span class="when">Notification</span><span class="tba">TBA</span></li>
+        <li><span class="when">Camera-ready</span><span class="tba">TBA</span></li>
+        <li><span class="when">Papers online</span><span>Two weeks before the workshop</span></li>
+        <!-- <li><span class="when">Workshop</span><span>CHI 2027, 10 to 14 May 2027, exact day <span class="tba">TBA</span></span></li> -->
+        <li><span class="when">Workshop</span><span class="tba">TBA</span></li>
+      </ol>
+      <p class="note">All deadlines are 23:59 Anywhere on Earth (AoE).</p>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <h2>Program</h2>
+    <div>
+      <div class="table-scroll">
+      <table class="schedule">
+        <tbody>
+          <tr>
+            <th scope="row">09:00</th>
+            <td><h3>Welcome and introductions</h3><p>Aims of the day and the three forces of HCI.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">09:15</th>
+            <td><h3>Mapping the landscape</h3><p>Lightning talks (5 minutes per participant) on where the state of the art is heading.</p></td>
+          </tr>
+          <tr class="pause"><th scope="row">10:30</th><td>Coffee break</td></tr>
+          <tr>
+            <th scope="row">11:00</th>
+            <td><h3>Grand Challenge Wall and Future Headlines 2035</h3><p>Collecting open challenges and imagining the headlines embodied and disembodied AI might produce a decade from now.</p></td>
+          </tr>
+          <tr class="pause"><th scope="row">12:30</th><td>Lunch</td></tr>
+          <tr>
+            <th scope="row">13:30</th>
+            <td><h3>Mini-panel: building cross-disciplinary bridges</h3><p>From disembodiment to augmented throughput using the body.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">14:15</th>
+            <td><h3>Designing the future agenda</h3><p>Breakout groups on each theme, developing moonshot proposals for hypothetical international projects.</p></td>
+          </tr>
+          <tr class="pause"><th scope="row">15:30</th><td>Coffee break</td></tr>
+          <tr>
+            <th scope="row">16:00</th>
+            <td><h3>Convergence and outputs</h3><p>Turning ideas into a research agenda document, a collaborative roadmap, and a joint paper outline.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">17:00</th>
+            <td><h3>Closing</h3></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Times are tentative and will be updated once the workshop date is confirmed.</p>
+
+      <div class="prose" style="margin-top:2.5rem">
+        <h3>After the workshop</h3>
+        <p>We will publish a summary of guidelines and future directions on this website. It will form the basis of a joint publication by organizers and participants, including a taxonomy of embodied-disembodied interaction levels and a position paper (e.g., in <em>Communications of the ACM</em>). We further plan a TOCHI special issue proposal on new interaction paradigms with AI and follow-up events at SIGCHI conferences such as IUI and CUI. A Slack workspace will keep the discussion going and support collaborations between participants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="organizers">
+  <div class="wrap">
+    <h2>Organizers</h2>
+    <div class="people">
+      <article class="person">
+        <!-- To add a photo, place it in images/ with the file name below. Initials are shown until then. -->
+        <div class="photo">MP<img src="images/mpe.webp" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://www.monicaperusquia.com/">Monica Perusquía-Hernández</a></h3>
+        <p class="aff">Nara Institute of Science and Technology, Japan</p>
+        <p>Affective and physiological computing, embodiment, VR, and human-AI interaction, with a focus on wearable sensing and AI-mediated communication.</p>
+      </article>
+      <!-- Elisabeth André: participation not yet confirmed
+      <article class="person">
+        <div class="photo">EA<img src="images/andre.jpg" alt="" onerror="this.remove()"></div>
+        <h3><a href="#">Elisabeth André</a></h3>
+        <p class="aff">University of Augsburg, Germany</p>
+        <p>Human-centered AI, affective computing, intelligent user interfaces, embodied conversational agents, and social signal processing.</p>
+      </article>
+      -->
+      <article class="person">
+        <div class="photo">MK<img src="images/mkn.jpg" alt="" onerror="this.remove()"></div>
+        <h3><a href="#">Michael T. Knierim</a></h3>
+        <p class="aff">Karlsruhe Institute of Technology, Germany, and University of Nottingham, UK</p>
+        <p>Wearable neurotechnology and physiological computing, studying how generative AI assistants reshape cognitive load, effort, and engagement in knowledge work.</p>
+      </article>
+      <article class="person">
+        <div class="photo">AE<img src="images/abdo.webp" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://abdoelali.com">Abdallah El Ali</a></h3>
+        <p class="aff">Centrum Wiskunde &amp; Informatica, Netherlands</p>
+        <p>Affective interactive systems, combining HCI, extended reality, and AI to measure, infer, and augment cognitive, affective, and social interaction.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="papers">
+  <div class="wrap">
+    <h2>Accepted papers</h2>
+    <div class="empty">
+      <p>Accepted papers will be listed here after the notification date, and available to read two weeks before the workshop.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="prose">
+      <p>For questions about the workshop or submissions, write to <a href="mailto:perusquia@ieee.org">perusquia@ieee.org</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <span>The Future of Embodied Interaction in the Age of Disembodied Intelligence, a workshop proposal for ACM CHI 2027</span>
+    <!-- <span>Pittsburgh, May 2027</span> -->
+  </div>
+</footer>
+
+<script>
+(function () {
+  var svg = document.getElementById('trajectory');
+  var NS = 'http://www.w3.org/2000/svg';
+  var ROSE = '#FF206E', BLUE = '#41EAD4', MUTED = 'rgba(255,255,255,.66)', LIGHT = '#FFFFFF', YELLOW = '#FBFF12', AXIS = 'rgba(255,255,255,.25)';
+  var BOTTOM = 255;
+
+  function el(name, attrs, parent) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  function text(x, y, str, attrs, parent) {
+    var t = el('text', Object.assign({ x: x, y: y, fill: MUTED, 'font-size': 14 }, attrs || {}), parent);
+    t.textContent = str; return t;
+  }
+  // Smooth curve through points (Catmull-Rom converted to cubic Bezier)
+  function curve(pts) {
+    var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      d += 'C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' +
+                 (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' +
+                 p2[0] + ' ' + p2[1];
+    }
+    return d;
+  }
+
+  // Era icons, drawn in a 28 x 28 box centred on (0, 0)
+  var icons = {
+    mainframe: 'M-10 -13h20v26h-20z M-4 -6a3 3 0 1 0 0.01 0 M4 -6a3 3 0 1 0 0.01 0 M-6 6h12',
+    desktop:   'M-13 -11h26v17h-26z M0 6v5 M-6 12h12',
+    mobile:    'M-7 -13h14a2 2 0 0 1 2 2v22a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-22a2 2 0 0 1 2 -2z M-2 9h4',
+    wearable:  'M-5 -14h10v6 M-5 14h10v-6 M-9 -8h18v16h-18z M-7 1h3l2 -4l3 7l2 -3h4',
+    chat:      'M-13 -10h26v16h-14l-6 6v-6h-6z M-6 -2h0.01 M0 -2h0.01 M6 -2h0.01',
+    next:      'M-8 -6a5 5 0 1 0 0.01 0 M-16 12c1 -7 15 -7 16 0 M3 -12h11v9h-6l-3 3v-3h-2z'
+  };
+  var eras = [[70, 'Mainframes', 'mainframe'], [260, 'Desktop and GUI', 'desktop'], [450, 'Mobile and touch', 'mobile'],
+              [640, 'Wearables and biosignals', 'wearable'], [830, 'LLM assistants', 'chat'], [1030, 'Next', 'next']];
+  el('line', { x1: 40, x2: 1070, y1: BOTTOM, y2: BOTTOM, stroke: AXIS, 'stroke-width': 1 });
+  eras.forEach(function (e) {
+    var isNext = e[2] === 'next';
+    el('path', { d: icons[e[2]], transform: 'translate(' + e[0] + ' ' + (BOTTOM + 30) + ')', fill: 'none',
+                 stroke: isNext ? YELLOW : MUTED, 'stroke-width': 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    text(e[0], BOTTOM + 72, e[1], { 'text-anchor': 'middle', 'font-size': 15, fill: isNext ? YELLOW : MUTED });
+  });
+
+  // Trajectories (conceptual)
+  var cognitive = [[70, 232], [260, 212], [450, 188], [640, 168], [760, 140], [830, 58]];
+  var embodied  = [[70, 240], [260, 215], [450, 160], [640, 80], [735, 70], [830, 180]];
+  var cogPath = el('path', { d: curve(cognitive), fill: 'none', stroke: BLUE, 'stroke-width': 3.5, 'stroke-linecap': 'round' });
+  var embPath = el('path', { d: curve(embodied), fill: 'none', stroke: ROSE, 'stroke-width': 3.5, 'stroke-linecap': 'round' });
+
+  // What each trajectory stands for
+  var embLabel = el('g', {});
+  text(640, 36, 'Embodiment', { 'text-anchor': 'end', fill: ROSE, 'font-size': 16, 'font-weight': 700 }, embLabel);
+  text(640, 55, 'perception, action, physiology, emotion', { 'text-anchor': 'end' }, embLabel);
+  var cogLabel = el('g', {});
+  text(300, 226, 'Cognitive support', { fill: BLUE, 'font-size': 16, 'font-weight': 700 }, cogLabel);
+  text(300, 245, 'memory, reasoning, creativity, decision making', {}, cogLabel);
+
+  // Decoupling: the gap at the LLM era, and what it puts at stake
+  var gap = el('g', {});
+  el('path', { d: 'M824 62 H836 M830 62 V176 M824 176 H836', fill: 'none', stroke: LIGHT, 'stroke-opacity': .6, 'stroke-width': 1.5 }, gap);
+  text(830, 206, 'Decoupling', { 'text-anchor': 'middle', fill: LIGHT, 'font-size': 16, 'font-weight': 700 }, gap);
+  text(830, 225, 'trust, empathy, agency', { 'text-anchor': 'middle' }, gap);
+
+  // Open question: re-coupling into embodied human-AI symbiosis
+  var f1 = el('path', { d: 'M830 58 C900 50 960 46 1010 44', fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
+  var f2 = el('path', { d: 'M830 180 C900 170 950 80 1010 52', fill: 'none', stroke: ROSE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
+  var q = el('g', {});
+  el('circle', { cx: 1030, cy: 48, r: 17, fill: 'none', stroke: YELLOW, 'stroke-width': 2 }, q);
+  text(1030, 54, '?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 18, 'font-weight': 700 }, q);
+  var qLabel = el('g', {});
+  text(1030, 94, 'Re-coupling?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 16, 'font-weight': 700 }, qLabel);
+  text(1030, 113, 'embodied human-AI', { 'text-anchor': 'middle' }, qLabel);
+  text(1030, 130, 'symbiosis', { 'text-anchor': 'middle' }, qLabel);
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !cogPath.getTotalLength) return;
+
+  // One load sequence: past trajectories draw in, the gap appears, then the open question
+  [cogPath, embPath].forEach(function (p) {
+    var len = p.getTotalLength();
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+  });
+  var later = [[embLabel, 1.0], [cogLabel, 1.0], [gap, 1.6], [f1, 2.2], [f2, 2.2], [q, 2.7], [qLabel, 2.8]];
+  later.forEach(function (x) { x[0].style.opacity = 0; });
+  requestAnimationFrame(function () { requestAnimationFrame(function () {
+    [cogPath, embPath].forEach(function (p) {
+      p.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)';
+      p.style.strokeDashoffset = 0;
+    });
+    later.forEach(function (x) {
+      x[0].style.transition = 'opacity .6s ease ' + x[1] + 's';
+      x[0].style.opacity = 1;
+    });
+  }); });
+})();
+</script>
+</body>
+</html>
