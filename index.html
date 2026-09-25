@@ -117,6 +117,8 @@ main section { padding: 5rem 1.5rem; border-bottom: 1px solid var(--line); }
 .schedule td h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 .25rem; }
 .schedule td p { margin: 0; color: var(--muted); font-size: 1rem; }
 .schedule tr.pause td, .schedule tr.pause th { color: var(--muted); font-weight: 400; font-style: italic; }
+.schedule tr.session th { font-size: 1.05rem; font-weight: 800; letter-spacing: .02em; padding-top: 1.6rem; }
+.schedule tr.session:first-child th { padding-top: .6rem; border-top: 0; }
 .note { font-size: .95rem; color: var(--muted); margin-top: 1.2rem; }
 .table-scroll { overflow-x: auto; }
 
@@ -184,6 +186,9 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     <div class="hero-actions">
       <a class="btn btn-primary" href="#call">Read the call for papers</a>
       <a class="btn btn-ghost" href="proposal.pdf">Workshop proposal (PDF)</a>
+      <!-- Slack (hidden until the workspace exists; replace the invite link here and in the Contact section):
+      <a class="btn btn-ghost" href="https://join.slack.com/t/REPLACE-WITH-INVITE">Join the Slack</a>
+      -->
     </div>
   </div>
   <figure class="trajectory">
@@ -198,7 +203,7 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
       <span class="key k-future">Open question</span>
       <span class="conceptual">Conceptual illustration, not data</span>
     </figcaption>
-	-->
+  -->
   </figure>
 </header>
 
@@ -296,13 +301,13 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     <div class="prose">
       <p class="note" style="margin-top:0">This workshop is currently a proposal. The call below will open if the workshop is accepted.</p>
       <!-- <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a one-day workshop at ACM CHI 2027. [...]</p> -->
-      <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a one-day workshop. We welcome participants from HCI, affective and physiological computing, psychology, neuroscience, data science, mixed reality, robotics, philosophy of mind, and digital ethics.</p>
+      <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a workshop of two consecutive 90-minute sessions. We welcome participants from HCI, affective and physiological computing, psychology, neuroscience, data science, mixed reality, robotics, philosophy of mind, and digital ethics.</p>
 
       <h3>What to submit</h3>
       <p>Position papers or case studies of 4 to 8 pages that present a project or articulate a challenge related to the workshop themes. Alternatively, you may submit a previously published paper that raises relevant questions, accompanied by a short statement of how it relates to the workshop.</p>
 
       <h3>How to submit</h3>
-      <p>Submissions use the <a href="https://ceur-ws.org/HOWTOSUBMIT.html#PREPARE">CEUR Workshop Proceedings template</a>, must follow the <a href="https://www.acm.org/publications/authors/submissions">ACM accessibility guidelines</a>, and are submitted via <a href="#">EasyChair</a>. Submissions are selected by the organizing committee based on quality and contribution to the workshop themes, with a particular focus on novel interaction paradigms with AI.</p>
+      <p>Submissions use the <a href="https://ceur-ws.org/HOWTOSUBMIT.html#PREPARE">CEUR Workshop Proceedings template</a>, must follow the <a href="https://www.acm.org/publications/authors/submissions">ACM accessibility guidelines</a>, and are submitted via <a href="https://easychair.org/conferences/?conf=eiadi2027">EasyChair</a>. Submissions are selected by the organizing committee based on quality and contribution to the workshop themes, with a particular focus on novel interaction paradigms with AI.</p>
 
       <h3>Publication</h3>
       <p>Accepted papers will be published in the workshop proceedings on <a href="https://ceur-ws.org/">CEUR-WS.org</a>. With the authors' consent, accepted papers will also be available on this website two weeks before the conference.</p>
@@ -337,41 +342,34 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
       <div class="table-scroll">
       <table class="schedule">
         <tbody>
+          <tr class="session"><th scope="rowgroup" colspan="2">Session 1</th></tr>
           <tr>
-            <th scope="row">09:00</th>
-            <td><h3>Welcome and introductions</h3><p>Aims of the day and the three forces of HCI.</p></td>
+            <th scope="row">50 min</th>
+            <td><h3>Mapping the landscape</h3><p>Lightning talks of 5 minutes per accepted position paper, establishing where the state of the art stands and where it is heading.</p></td>
+          </tr>
+          <tr class="pause"><th scope="row">10 min</th><td>Break</td></tr>
+          <tr>
+            <th scope="row">30 min</th>
+            <td><h3>Grand Challenge Wall</h3><p>Participants collect open challenges and answer them with "Future Headlines (2035)", short hypothetical solutions recorded on a shared digital board.</p></td>
+          </tr>
+          <tr class="session"><th scope="rowgroup" colspan="2">Session 2</th></tr>
+          <tr>
+            <th scope="row">30 min</th>
+            <td><h3>Designing the future agenda</h3><p>Breakout groups take up the challenges from the wall and develop moonshot proposals for hypothetical projects.</p></td>
           </tr>
           <tr>
-            <th scope="row">09:15</th>
-            <td><h3>Mapping the landscape</h3><p>Lightning talks (5 minutes per participant) on where the state of the art is heading.</p></td>
+            <th scope="row">25 min</th>
+            <td><h3>Group reports</h3><p>Each breakout group presents its proposal for discussion.</p></td>
           </tr>
-          <tr class="pause"><th scope="row">10:30</th><td>Coffee break</td></tr>
+          <tr class="pause"><th scope="row">5 min</th><td>Break</td></tr>
           <tr>
-            <th scope="row">11:00</th>
-            <td><h3>Grand Challenge Wall and Future Headlines 2035</h3><p>Collecting open challenges and imagining the headlines embodied and disembodied AI might produce a decade from now.</p></td>
-          </tr>
-          <tr class="pause"><th scope="row">12:30</th><td>Lunch</td></tr>
-          <tr>
-            <th scope="row">13:30</th>
-            <td><h3>Mini-panel: building cross-disciplinary bridges</h3><p>From disembodiment to augmented throughput using the body.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">14:15</th>
-            <td><h3>Designing the future agenda</h3><p>Breakout groups on each theme, developing moonshot proposals for hypothetical international projects.</p></td>
-          </tr>
-          <tr class="pause"><th scope="row">15:30</th><td>Coffee break</td></tr>
-          <tr>
-            <th scope="row">16:00</th>
-            <td><h3>Convergence and outputs</h3><p>Turning ideas into a research agenda document, a collaborative roadmap, and a joint paper outline.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">17:00</th>
-            <td><h3>Closing</h3></td>
+            <th scope="row">30 min</th>
+            <td><h3>Closing fishbowl</h3><p>An inner circle debates one broad question while the others observe, and anyone can swap in by tapping a member of the circle on the shoulder. The question: what should the field prioritize over the next decade to improve communication between people and their AI systems?</p></td>
           </tr>
         </tbody>
       </table>
       </div>
-      <p class="note">Times are tentative and will be updated once the workshop date is confirmed.</p>
+      <p class="note">The workshop runs as two consecutive 90-minute sessions, in person. The session times will be announced once the schedule is confirmed.</p>
 
       <div class="prose" style="margin-top:2.5rem">
         <h3>After the workshop</h3>
@@ -405,10 +403,16 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
         <p>Human-centered AI, affective computing, intelligent user interfaces, embodied conversational agents, and social signal processing.</p>
       </article>
       <article class="person">
-        <div class="photo">AE<img src="images/abdo.webp" alt="" onerror="this.remove()"></div>
-        <h3><a href="https://abdoelali.com">Abdallah El Ali</a></h3>
-        <p class="aff">Centrum Wiskunde &amp; Informatica, Netherlands</p>
-        <p>Affective interactive systems, combining HCI, extended reality, and AI to measure, infer, and augment cognitive, affective, and social interaction.</p>
+        <div class="photo">SV<img src="images/steeven.webp" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://posthci.com/">Steeven Villa</a></h3>
+        <p class="aff">LMU Munich, Germany</p>
+        <p>HCI, HRI, Haptics, Human Augmentation</p>
+      </article>
+    <article class="person">
+        <div class="photo">ES<img src="images/ekaterina.jpg" alt="" onerror="this.remove()"></div>
+        <h3><a href="#">Ekaterina Stepanova</a></h3>
+        <p class="aff">KTH Royal Institute of Technology, Sweden</p>
+        <p>Embodied Cognition, Sense of Connection, Virtual Reality, Transformative Experience, Self</p>
       </article>
       <article class="person">
         <div class="photo">PL<img src="images/pedro.jpg" alt="" onerror="this.remove()"></div>
@@ -417,10 +421,16 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
         <p>Human-Computer Interaction, Virtual Reality, Haptics, Augmented Reality, Wearable</p>
       </article>
       <article class="person">
-        <div class="photo">ES<img src="images/ekaterina.jpg" alt="" onerror="this.remove()"></div>
-        <h3><a href="#">Ekaterina Stepanova</a></h3>
-        <p class="aff">KTH Royal Institute of Technology, Sweden</p>
-        <p>Embodied Cognition, Sense of Connection, Virtual Reality, Transformative Experience, Self</p>
+        <div class="photo">MGF<img src="images/mar.webp" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://research.google/people/108218/?&type=google">Mar Gonzalez-Franco</a></h3>
+        <p class="aff">Google, United States</p>
+        <p>Neuroscience, XR, Human-Computer Interaction, Virtual Reality</p>
+      </article>
+      <article class="person">
+        <div class="photo">AE<img src="images/abdo.webp" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://abdoelali.com">Abdallah El Ali</a></h3>
+        <p class="aff">Centrum Wiskunde &amp; Informatica, Netherlands</p>
+        <p>Affective interactive systems, combining HCI, extended reality, and AI to measure, infer, and augment cognitive, affective, and social interaction.</p>
       </article>
     </div>
   </div>
@@ -440,6 +450,10 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     <h2>Contact</h2>
     <div class="prose">
       <p>For questions about the workshop or submissions, write to <a href="mailto:perusquia@ieee.org">perusquia@ieee.org</a>.</p>
+      <!-- Slack (hidden until the workspace exists):
+      <h3>Slack</h3>
+      <p>Discussion before, during, and after the workshop happens in our Slack workspace, which stays open for follow-up collaborations. Everyone interested in the topic is welcome, whether or not they submit a paper. <a href="https://join.slack.com/t/REPLACE-WITH-INVITE">Join the workshop Slack</a>.</p>
+      -->
     </div>
   </div>
 </section>
