@@ -16,6 +16,7 @@
   --line: #E2E3E0;
   --body: #FF206E;      /* embodied: physiological signal */
   --token: #41EAD4;     /* disembodied: language tokens */
+  --token-ink: #0E9182; /* teal darkened for text on white */
   --night: #0C0F0A;
   --night-ink: #FFFFFF;
   --question: #FBFF12;   /* the open question: re-coupling */
@@ -101,10 +102,21 @@ main section { padding: 5rem 1.5rem; border-bottom: 1px solid var(--line); }
 .effect.down { color: var(--ink); background: var(--body); }
 
 /* Themes */
-.themes { margin: 0; display: grid; grid-template-columns: 13rem minmax(0, 1fr); max-width: 52rem; }
-.themes dt, .themes dd { padding: 1.1rem 0; border-top: 1px solid var(--line); margin: 0; }
-.themes dt { font-family: var(--display); font-weight: 600; padding-right: 1.5rem; }
-.themes dd { color: var(--ink); }
+.themes-intro { max-width: 52rem; margin: 0 0 1.6rem; color: var(--ink); }
+.themes-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 1rem; align-items: start; }
+.theme-column { display: grid; gap: 1rem; }
+.theme-panel { padding: 1.1rem 1.2rem 1.2rem; }
+.theme-panel.limits { background: #F2F3F1; }
+.theme-panel.ai { background: rgba(255, 32, 110, .07); }
+.theme-panel.body { background: rgba(65, 234, 212, .16); }
+.theme-panel h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin: 0; }
+.theme-panel.ai h3 { color: var(--body); }
+.theme-panel.body h3 { color: var(--token-ink); }
+.theme-panel .strand { font-family: var(--display); font-size: .95rem; color: var(--muted); margin: .15rem 0 1rem; }
+.theme-panel dl { margin: 0; }
+.theme-panel dt { font-family: var(--display); font-weight: 600; font-size: 1rem; margin-top: .9rem; }
+.theme-panel dt:first-child { margin-top: 0; }
+.theme-panel dd { margin: .15rem 0 0; font-size: .97rem; line-height: 1.5; color: var(--muted); }
 
 /* Dates and schedule */
 .timeline { list-style: none; margin: 0; padding: 0; max-width: 40rem; }
@@ -147,8 +159,7 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
   .wrap { grid-template-columns: 1fr; gap: 1.5rem; }
   .wrap > h2 { position: static; }
   .forces { grid-template-columns: 1fr; }
-  .themes { grid-template-columns: 1fr; }
-  .themes dd { border-top: 0; padding-top: 0; }
+  .themes-grid { grid-template-columns: 1fr; }
   .timeline li { grid-template-columns: 1fr; gap: .1rem; }
   main section { padding: 3.5rem 1.25rem; }
   .hero-inner { padding-top: 3.5rem; }
@@ -182,10 +193,10 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     <!-- <p class="hero-meta">ACM CHI 2027 workshop, Pittsburgh, USA, May 2027 (exact day TBA)</p> -->
     <p class="hero-meta">A workshop proposal for ACM CHI 2027</p>
     <h1>The Future of Embodied Interaction in the Age of Disembodied Intelligence</h1>
-    <p class="hero-lede">Humans remain embodied while AI becomes increasingly disembodied. We bring together researchers from HCI, affective and physiological computing, embodied cognition, neuroscience, and AI to set a research agenda for what this means for future interfaces.</p>
+    <p class="hero-lede">Humans remain embodied while AI becomes increasingly disembodied. We bring together researchers from HCI, affective and physiological computing, embodied cognition, neuroscience, and AI to ask what is lost without embodiment, and how intelligence and embodiment might be re-coupled.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#call">Read the call for papers</a>
-      <a class="btn btn-ghost" href="proposal.pdf">Workshop proposal (PDF)</a>
+      <a class="btn btn-ghost" href="docs/CHI2027_Workshop_DisembodiedIntelligence.pdf">Workshop proposal (PDF)</a>
       <!-- Slack (hidden until the workspace exists; replace the invite link here and in the Contact section):
       <a class="btn btn-ghost" href="https://join.slack.com/t/REPLACE-WITH-INVITE">Join the Slack</a>
       -->
@@ -232,34 +243,54 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
           <span class="effect up">LLMs accelerate this</span>
         </div>
         <div class="force">
-          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person emitting bodily signals such as heartbeat and brain activity. The signals travel toward an AI system but fade out and break off before reaching it.">
-  <defs><linearGradient id="fadeRose" x1="0" x2="1"><stop offset="0" stop-color="#FF206E"/><stop offset=".65" stop-color="#FF206E"/><stop offset="1" stop-color="#FF206E" stop-opacity="0"/></linearGradient></defs>
-  <circle cx="55" cy="50" r="14" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><path d="M25 120 C25 60 85 60 85 120" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M55 96 c-6 -6 -12 -1 -7 5 l7 7 l7 -7 c5 -6 -1 -11 -7 -5 z" fill="#FF206E"/>
-  <path d="M74 38 a14 14 0 0 1 0 24 M80 32 a22 22 0 0 1 0 36" fill="none" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
-  <path d="M68 102 H84 L89 90 L95 114 L101 96 L105 102 H150" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M90 50 C110 50 125 56 145 60" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/>
-  <path d="M154 52 l10 10 M164 52 l-10 10 M154 96 l10 10 M164 96 l-10 10" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
-  <rect x="178" y="36" width="46" height="58" rx="10" fill="rgba(65,234,212,.18)" stroke="#41EAD4" stroke-width="2"/><rect x="188" y="48" width="30" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="59" width="22" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="70" width="26" height="5" rx="2" fill="#41EAD4"/><rect x="188" y="81" width="16" height="5" rx="2" fill="#41EAD4"/>
-  <text x="201" y="118" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">AI</text>
+          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person wearing an earbud, a chest sensor, and a wristband with a pulse trace. The signals they capture travel toward an AI system but are cut off before reaching it.">
+  <defs><linearGradient id="fadeRose" x1="0" x2="1"><stop offset="0" stop-color="#FF206E"/><stop offset=".7" stop-color="#FF206E"/><stop offset="1" stop-color="#FF206E" stop-opacity="0"/></linearGradient></defs>
+  <circle cx="48" cy="42" r="14" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+  <path d="M22 124 C22 64 74 64 74 124" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M71 80 L100 104" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="61" cy="46" r="4.5" fill="#FF206E"/>
+  <path d="M69 34 a15 15 0 0 1 0 22" fill="none" stroke="#FF206E" stroke-width="1.8" stroke-linecap="round"/>
+  <rect x="32" y="84" width="16" height="12" fill="none" stroke="#FF206E" stroke-width="2"/>
+  <path d="M35 90 h3 l2 -4 l3 7 l2 -3 h1" fill="none" stroke="#FF206E" stroke-width="1.4"/>
+  <path d="M48 90 H66" stroke="#FF206E" stroke-width="1.8" stroke-linecap="round"/>
+  <rect x="92" y="94" width="20" height="18" fill="none" stroke="#FF206E" stroke-width="2"/>
+  <path d="M88 98 l5 -4 M107 116 l5 -4" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
+  <path d="M96 103 h3 l2 -4 l3 8 l2 -4 h2" fill="none" stroke="#FF206E" stroke-width="1.4"/>
+  <path d="M116 60 C134 58 144 60 154 62" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <path d="M118 100 C136 98 146 94 154 90" fill="none" stroke="url(#fadeRose)" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <path d="M160 56 l10 10 M170 56 l-10 10 M160 84 l10 10 M170 84 l-10 10" stroke="#FF206E" stroke-width="2" stroke-linecap="round"/>
+  <rect x="184" y="40" width="44" height="54" rx="10" fill="rgba(65,234,212,.18)" stroke="#41EAD4" stroke-width="2"/>
+  <rect x="193" y="50" width="27" height="5" rx="2" fill="#41EAD4"/><rect x="193" y="61" width="20" height="5" rx="2" fill="#41EAD4"/><rect x="193" y="72" width="24" height="5" rx="2" fill="#41EAD4"/>
+  <text x="206" y="116" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">AI</text>
 </svg></figure>
           <h3>Embodiment</h3>
           <p>Interfaces move closer to perception, action, physiology, and emotion.</p>
           <span class="effect down">LLMs step back from this</span>
         </div>
         <div class="force">
-          <figure><svg viewBox="0 0 240 140" role="img" aria-label="A person at the centre of concentric rings. A desktop computer sits on the outer ring as an external tool, and an AI assistant has moved to the innermost ring as a continuous partner.">
-  <defs><marker id="arrowBlue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#41EAD4"/></marker></defs>
-  <circle cx="120" cy="72" r="64" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-dasharray="3 5"/>
-  <circle cx="120" cy="72" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-dasharray="3 5"/>
-  <circle cx="120" cy="62" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-  <path d="M103 90 C103 72 137 72 137 90" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-  <g opacity=".55"><rect x="42" y="30" width="26" height="18" rx="2" fill="#0C0F0A" stroke="rgba(255,255,255,.7)" stroke-width="1.8"/><path d="M55 48 v5 M49 54 h12" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round"/></g>
-  <path d="M70 44 C95 30 140 22 150 38" fill="none" stroke="#41EAD4" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowBlue)"/>
-  <path d="M146 48 h26 v16 h-14 l-6 6 v-6 h-6 z" fill="rgba(65,234,212,.22)" stroke="#41EAD4" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M152 56 h14" stroke="#41EAD4" stroke-width="2" stroke-linecap="round"/>
-  <text x="55" y="68" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">tool</text>
-  <text x="190" y="94" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">partner</text>
+          <figure><svg viewBox="0 0 240 140" role="img" aria-label="On the left, a person sits apart from a desktop computer they use as an external tool. An arrow leads to the right, where the same person carries the system with them: an assistant attached at the shoulder, sensors at ear and wrist, and a dashed ring showing its continuous presence.">
+  <defs><marker id="arrowTeal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#41EAD4"/></marker></defs>
+
+  <g opacity=".6">
+    <circle cx="24" cy="52" r="10" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+    <path d="M10 88 C10 68 38 68 38 88" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    <path d="M42 58 h16" stroke="rgba(255,255,255,.65)" stroke-width="1.5" stroke-dasharray="3 4"/>
+    <rect x="62" y="42" width="28" height="20" fill="none" stroke="#41EAD4" stroke-width="2"/>
+    <path d="M76 62 v6 M68 68 h16" stroke="#41EAD4" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="112" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">external tool</text>
+  </g>
+
+  <path d="M100 66 h22" stroke="#41EAD4" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+  <circle cx="172" cy="58" r="36" fill="none" stroke="rgba(65,234,212,.45)" stroke-width="1.2" stroke-dasharray="4 5"/>
+  <circle cx="164" cy="44" r="11" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+  <path d="M148 82 C148 60 180 60 180 82" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="182" y="34" width="24" height="17" fill="rgba(65,234,212,.2)" stroke="#41EAD4" stroke-width="2"/>
+  <path d="M188 51 v6 l6 -6" fill="rgba(65,234,212,.2)" stroke="#41EAD4" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M187 40 h13 M187 46 h8" stroke="#41EAD4" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="173" cy="47" r="3" fill="#41EAD4"/>
+  <circle cx="181" cy="75" r="3" fill="#41EAD4"/>
+  <text x="172" y="112" text-anchor="middle" font-family="Libre Franklin, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.7)">continuous partner</text>
 </svg></figure>
           <h3>Integration</h3>
           <p>Computers turn from external tools into continuous partners in everyday life.</p>
@@ -268,7 +299,7 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
       </div>
 
       <p>Whereas wearables enabled embodied interaction and made physiological signals accessible, today's LLMs have largely retreated to disembodied interfaces. Interacting with disembodied systems is not new in itself. What is new is that these systems now take part in communication, learning, emotional support, and decision making in ways that appear almost human-like, while having no body and only limited access to the <em>Umwelt</em> that grounds human experience.</p>
-      <p>The resulting decoupling of intelligence from embodiment raises fundamental questions about cognition, emotion, empathy, trust, agency, and human-AI interaction. It is no longer a theoretical concern but a daily experience for millions of users. This workshop aims to establish an interdisciplinary research agenda that defines the theoretical foundations, design principles, and technological opportunities for embodied interaction in the age of disembodied intelligence.</p>
+      <p>The resulting decoupling of intelligence from embodiment raises fundamental questions about cognition, emotion, empathy, trust, agency, and human-AI interaction. It is no longer a theoretical concern but a daily experience for millions of users. Two developments could close that gap: AI systems could gain embodied access to the world, and human-facing interfaces could move onto the body. The two are not interchangeable, since giving a system its own senses and putting the interface on the body raise different questions about grounding, privacy, and control. This workshop aims to establish an interdisciplinary research agenda that defines the theoretical foundations, design principles, and technological opportunities for embodied interaction in the age of disembodied intelligence.</p>
     </div>
   </div>
 </section>
@@ -276,22 +307,48 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
 <section id="themes">
   <div class="wrap">
     <h2>Themes and open questions</h2>
-    <dl class="themes">
-      <dt>Disembodied intelligence</dt>
-      <dd>How much intelligence, social understanding, and emotional competence can emerge without embodiment?</dd>
-      <dt>Embodied residue</dt>
-      <dd>To what extent can LLMs induce a latent world model of physically embodied reality purely from human-generated text?</dd>
-      <dt>Cognitive decoupling</dt>
-      <dd>What are the scientific implications of separating intelligence from physiology and sensorimotor experience?</dd>
-      <dt>Extended cognition</dt>
-      <dd>How should cognition be understood when it is distributed across embodied humans and intelligent artificial systems?</dd>
-      <dt>Interactive language</dt>
-      <dd>How does cognition change when language no longer only serves communication but actively participates in reasoning and reflection?</dd>
-      <dt>Embodied bottlenecks</dt>
-      <dd>Can physiological, affective, and behavioral interfaces help people manage cognitive overload, trust calibration, and agency when interacting with multiple AI systems?</dd>
-      <dt>Human-AI symbiosis</dt>
-      <dd>What principles should guide the design of systems in which cognition is shared between embodied humans and disembodied intelligent agents?</dd>
-    </dl>
+    <div>
+      <p class="themes-intro">The workshop's questions fall into two parts: what is lost when intelligence is decoupled from embodiment, and how embodiment might be reintroduced along two strands that are not interchangeable.</p>
+
+      <div class="themes-grid">
+        <section class="theme-panel limits" aria-labelledby="g1">
+          <h3 id="g1">1. Understanding the limits</h3>
+          <p class="strand">What is lost without embodiment?</p>
+          <dl>
+            <dt>Disembodied intelligence</dt>
+            <dd>How much intelligence, social understanding, and emotional competence can emerge without embodiment?</dd>
+            <dt>Embodied residue</dt>
+            <dd>To what extent can AI acquire knowledge of embodied reality indirectly from language and other human-generated data?</dd>
+            <dt>Cognitive decoupling</dt>
+            <dd>What are the scientific implications of separating intelligence from physiology and sensorimotor experience?</dd>
+          </dl>
+        </section>
+
+        <div class="theme-column">
+          <section class="theme-panel ai" aria-labelledby="g2a">
+            <h3 id="g2a">2a. Designing the symbiosis</h3>
+            <p class="strand">AI gains embodied access</p>
+            <dl>
+              <dt>Grounded intelligence</dt>
+              <dd>How do sensing and acting in the physical world change the capabilities and limitations of AI systems?</dd>
+              <dt>Extended cognition</dt>
+              <dd>How should cognition be understood when it is distributed across embodied humans and intelligent artificial systems?</dd>
+            </dl>
+          </section>
+
+          <section class="theme-panel body" aria-labelledby="g2b">
+            <h3 id="g2b">2b. Designing the symbiosis</h3>
+            <p class="strand">Human-AI interfaces move onto the body</p>
+            <dl>
+              <dt>Embodied bottlenecks</dt>
+              <dd>Can physiological, affective, and behavioral interfaces help people manage cognitive overload, trust, and agency when interacting with AI?</dd>
+              <dt>Human-AI symbiosis</dt>
+              <dd>What principles should guide the design of future systems in which cognition and control are shared between embodied humans and intelligent artificial systems?</dd>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -301,19 +358,19 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     <div class="prose">
       <p class="note" style="margin-top:0">This workshop is currently a proposal. The call below will open if the workshop is accepted.</p>
       <!-- <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a one-day workshop at ACM CHI 2027. [...]</p> -->
-      <p>We invite researchers and practitioners working with and designing for LLM-based systems to join a workshop of two consecutive 90-minute sessions. We welcome participants from HCI, affective and physiological computing, psychology, neuroscience, data science, mixed reality, robotics, philosophy of mind, and digital ethics.</p>
+      <p>We invite researchers and practitioners working with and designing for human-AI interaction to join a workshop of two consecutive 90-minute sessions. We welcome participants from HCI, affective, wearable, and physiological computing, robotics, embodied cognition, psychology, neuroscience, and AI.</p>
 
       <h3>What to submit</h3>
-      <p>Position papers or case studies of 4 to 8 pages that present a project or articulate a challenge related to the workshop themes. Alternatively, you may submit a previously published paper that raises relevant questions, accompanied by a short statement of how it relates to the workshop.</p>
+      <p>Two-page extended abstracts that present a project or articulate a challenge related to this call, stating explicitly how it relates to the core concepts and open questions above. Previously published papers summarized as extended abstracts are also welcome.</p>
 
       <h3>How to submit</h3>
-      <p>Submissions use the <a href="https://ceur-ws.org/HOWTOSUBMIT.html#PREPARE">CEUR Workshop Proceedings template</a>, must follow the <a href="https://www.acm.org/publications/authors/submissions">ACM accessibility guidelines</a>, and are submitted via <a href="https://easychair.org/conferences/?conf=eiadi2027">EasyChair</a>. Submissions are selected by the organizing committee based on quality and contribution to the workshop themes, with a particular focus on novel interaction paradigms with AI.</p>
+      <p>Submissions use the <a href="https://ceur-ws.org/HOWTOSUBMIT.html#PREPARE">CEUR Workshop Proceedings template</a>, must follow the <a href="https://www.acm.org/publications/authors/submissions">ACM accessibility and AI usage guidelines</a>, and are submitted via <a href="https://easychair.org/conferences/?conf=eiadi2027">EasyChair</a>. Submissions are selected on the quality and contribution of the work relating to the workshop themes, with a particular focus on novel interaction paradigms with AI. Abstracts with complementary relevance will be invited for lightning talks.</p>
 
       <h3>Publication</h3>
-      <p>Accepted papers will be published in the workshop proceedings on <a href="https://ceur-ws.org/">CEUR-WS.org</a>. With the authors' consent, accepted papers will also be available on this website two weeks before the conference.</p>
+      <p>All abstracts will be summarized by the organizers, made available on this website, and published as proceedings on <a href="https://ceur-ws.org/">CEUR-WS.org</a>.</p>
 
       <h3>Attendance</h3>
-      <p>At least one author of each accepted submission must register for the workshop and the host conference and attend the workshop in person.</p>
+      <p>At least one author of each accepted submission must register for the workshop and the CHI 2027 conference and attend the workshop in person.</p>
     </div>
   </div>
 </section>
@@ -346,36 +403,47 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
         <tbody>
           <tr class="session"><th scope="rowgroup" colspan="2">Session 1</th></tr>
           <tr>
-            <th scope="row">50 min</th>
-            <td><h3>Mapping the landscape</h3><p>Lightning talks of 5 minutes per accepted position paper, establishing where the state of the art stands and where it is heading.</p></td>
+            <th scope="row">5 min</th>
+            <td><h3>Introduction</h3><p>Organizers, goals, methods, and post-workshop activities.</p></td>
           </tr>
-          <tr class="pause"><th scope="row">10 min</th><td>Break</td></tr>
           <tr>
-            <th scope="row">30 min</th>
-            <td><h3>Grand Challenge Wall</h3><p>Participants collect open challenges and answer them with "Future Headlines (2035)", short hypothetical solutions recorded on a shared digital board.</p></td>
+            <th scope="row">5 min</th>
+            <td><h3>Embodied warm-up</h3><p>A movement exercise inspired by contact improvisation, in which participants experience how a sense of agency can transfer between collaborating agents in a symbiotic coupling.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">50 min</th>
+            <td><h3>Mapping the landscape</h3><p>Lightning talks on selected submissions, 3 minutes each with 2 minutes of questions, establishing where the state of the art stands and where it is heading.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">5 min</th>
+            <td><h3>Landscape theme aggregation</h3><p>The organizers present a thematic analysis of the lightning talks, prepared in advance from the submissions.</p></td>
+          </tr>
+          <tr>
+            <th scope="row">25 min</th>
+            <td><h3>Grand Challenge Wall</h3><p>Participants propose grand challenges, which are grouped into "Future Headlines of Embodied Human-AI Interaction (2037)" on post-its or a shared digital board.</p></td>
           </tr>
           <tr class="session"><th scope="rowgroup" colspan="2">Session 2</th></tr>
           <tr>
             <th scope="row">30 min</th>
-            <td><h3>Designing the future agenda</h3><p>Breakout groups take up the challenges from the wall and develop moonshot proposals for hypothetical projects.</p></td>
+            <td><h3>Designing the future agenda</h3><p>Breakout groups form around the most popular headlines from session 1 and develop moonshot proposals for hypothetical projects.</p></td>
           </tr>
           <tr>
             <th scope="row">25 min</th>
-            <td><h3>Group reports</h3><p>Each breakout group presents its proposal for discussion.</p></td>
+            <td><h3>Presentation of moonshot proposals</h3><p>Each group shares its proposal.</p></td>
           </tr>
           <tr class="pause"><th scope="row">5 min</th><td>Break</td></tr>
           <tr>
             <th scope="row">30 min</th>
-            <td><h3>Closing fishbowl</h3><p>An inner circle debates one broad question while the others observe, and anyone can swap in by tapping a member of the circle on the shoulder. The question: what should the field prioritize over the next decade to improve communication between people and their AI systems?</p></td>
+            <td><h3>Closing fishbowl</h3><p>A small inner circle discusses one broad question while the others observe, and any participant can swap in by tapping someone on the shoulder. The question: what should this field prioritize in the next decade to optimize embodied throughput and communication between people and their AIs?</p></td>
           </tr>
         </tbody>
       </table>
       </div>
-      <p class="note">The workshop runs as two consecutive 90-minute sessions, in person. The session times will be announced once the schedule is confirmed.</p>
+      <p class="note">The workshop runs as two consecutive 90-minute sessions, in person, and is planned for about 20 participants. With more attendees, we will add digital participation and voting tools to gather and summarize contributions in real time. Session times will be announced once the schedule is confirmed.</p>
 
       <div class="prose" style="margin-top:2.5rem">
         <h3>After the workshop</h3>
-        <p>We will publish a summary of guidelines and future directions on this website. It will form the basis of a joint publication by organizers and participants, including a taxonomy of embodied-disembodied interaction levels and a position paper (e.g., in <em>Communications of the ACM</em>). We further plan a TOCHI special issue proposal on new interaction paradigms with AI and follow-up events at SIGCHI conferences such as IUI and CUI. A Slack workspace will keep the discussion going and support collaborations between participants.</p>
+        <p>We will publish a summary of guidelines and future directions on this website as living documentation of the outcomes, together with the hardware, software, and reading resources contributed by participants. These will form the basis of a joint publication by organizers and participants, to which all participants are invited as co-authors, including a taxonomy of embodied-disembodied interaction levels and a position paper (e.g., in <em>Communications of the ACM</em>). We further plan a special issue proposal (e.g., in TOCHI) on new embodied interaction paradigms with AI, possibly a Shonan or Dagstuhl meeting, and follow-up workshops at SIGCHI conferences. A Slack or Discord workspace will keep the discussion going and support collaborations between participants.</p>
       </div>
     </div>
   </div>
@@ -390,55 +458,55 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
         <div class="photo">MP<img src="images/mpe.webp" alt="" onerror="this.remove()"></div>
         <h3><a href="https://www.monicaperusquia.com/">Monica Perusquía-Hernández</a></h3>
         <p class="aff">Nara Institute of Science and Technology, Japan</p>
-        <p>Affective and physiological computing, embodiment, VR, and human-AI interaction, with a focus on wearable sensing and AI-mediated communication.</p>
+        <p>Affective and physiological computing, embodiment, and human-AI interaction, with a focus on wearable sensing and AI-mediated communication.</p>
       </article>
       <article class="person">
         <div class="photo">MK<img src="images/mkn.jpg" alt="" onerror="this.remove()"></div>
         <h3><a href="https://www.michaelknierim.info">Michael T. Knierim</a></h3>
         <p class="aff">Karlsruhe Institute of Technology, Germany, and University of Nottingham, UK</p>
-        <p>Wearable neurotechnology and physiological computing, studying how generative AI assistants reshape cognitive load, effort, and engagement in knowledge work.</p>
+        <p>Wearable neurotechnology and physiological computing, investigating the demands of digitally mediated knowledge work, such as workload and fatigue, and its positive experiences, such as flow and engagement.</p>
       </article>
       <article class="person">
         <div class="photo">EA<img src="images/andre.jpg" alt="" onerror="this.remove()"></div>
         <h3><a href="https://www.uni-augsburg.de/en/fakultaet/fai/informatik/prof/hcm/team/andre/">Elisabeth André</a></h3>
         <p class="aff">University of Augsburg, Germany</p>
-        <p>Human-centered AI, affective computing, intelligent user interfaces, embodied conversational agents, and social signal processing.</p>
+        <p>Human-centered AI, affective computing, and intelligent user interfaces, with a focus on embodied conversational agents and social signal processing.</p>
       </article>
       <article class="person">
         <div class="photo">ES<img src="images/katstep.png" alt="" onerror="this.remove()"></div>
         <h3><a href="https://www.kth.se/profile/katstep?l=en">Ekaterina Stepanova</a></h3>
         <p class="aff">KTH Royal Institute of Technology, Sweden</p>
-        <p>Embodied Cognition, Sense of Connection, Virtual Reality, Transformative Experience, Self</p>
+        <p>Intercorporeal Design: eliciting embodied social interaction through technology, and how embodied relations emerge between people and artificial agents. Spans XR, biosignals, soft robotics, and embodied AI.</p>
       </article>
       <article class="person">
         <div class="photo">SV<img src="images/steeven.jpg" alt="" onerror="this.remove()"></div>
         <h3><a href="https://posthci.com/">Steeven Villa</a></h3>
         <p class="aff">LMU Munich, Germany</p>
-        <p>HCI, HRI, Haptics, Human Augmentation</p>
+        <p>Human augmentation: technologies that extend cognitive, motor, and sensory capabilities, and their effects on cognition, behavior, and experience.</p>
       </article>
       <article class="person">
         <div class="photo">PL<img src="images/pedro.jpg" alt="" onerror="this.remove()"></div>
         <h3><a href="https://plopes.org/">Pedro Lopes</a></h3>
         <p class="aff">University of Chicago, United States</p>
-        <p>Human-Computer Interaction, Virtual Reality, Haptics, Augmented Reality, Wearable</p>
+        <p>Interfaces that operate through the body, combining haptics, wearables, and immersive systems to study and augment movement, perception, and agency.</p>
       </article>
       <article class="person">
-        <div class="photo">MGF<img src="images/mar.png" alt="" onerror="this.remove()"></div>
+        <div class="photo">MG<img src="images/mar.png" alt="" onerror="this.remove()"></div>
         <h3><a href="https://research.google/people/108218/?&type=google">Mar Gonzalez-Franco</a></h3>
         <p class="aff">Google, United States</p>
-        <p>Neuroscience, XR, Human-Computer Interaction, Virtual Reality</p>
+        <p>Immersive technologies and avatar embodiment, studying how virtual bodies shape perception, behavior, and the sense of self.</p>
       </article>
       <article class="person">
-        <div class="photo">ASC<img src="images/albrecht.jpg" alt="" onerror="this.remove()"></div>
-        <h3><a href="https://www.en.um.informatik.uni-muenchen.de/people/professors/schmidt/index.html">Mar Gonzalez-Franco</a></h3>
+        <div class="photo">AS<img src="images/albrecht.jpg" alt="" onerror="this.remove()"></div>
+        <h3><a href="https://www.en.um.informatik.uni-muenchen.de/people/professors/schmidt/index.html">Albrecht Schmidt</a></h3>
         <p class="aff">LMU Munich, Germany</p>
-        <p>Human-Computer Interaction, Human-AI Interaction, Interaction Design, Intelligent User Interfaces, AR</p>
+        <p>How digital technologies amplify human cognition and perception, spanning human-centered AI, ubiquitous computing, AR/VR, and physiological sensing.</p>
       </article>
       <article class="person">
         <div class="photo">AE<img src="images/abdo.webp" alt="" onerror="this.remove()"></div>
         <h3><a href="https://abdoelali.com">Abdallah El Ali</a></h3>
-        <p class="aff">Centrum Wiskunde &amp; Informatica, Netherlands</p>
-        <p>Affective interactive systems, combining HCI, extended reality, and AI to measure, infer, and augment cognitive, affective, and social interaction.</p>
+        <p class="aff">Centrum Wiskunde &amp; Informatica and Utrecht University, Netherlands</p>
+        <p>Affective interactive systems and trustworthy human-AI interaction, with a focus on human augmentation, AI self-extension, and AI transparency.</p>
       </article>
     </div>
   </div>
@@ -510,10 +578,10 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
     mobile:    'M-7 -13h14a2 2 0 0 1 2 2v22a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-22a2 2 0 0 1 2 -2z M-2 9h4',
     wearable:  'M-5 -14h10v6 M-5 14h10v-6 M-9 -8h18v16h-18z M-7 1h3l2 -4l3 7l2 -3h4',
     chat:      'M-13 -10h26v16h-14l-6 6v-6h-6z M-6 -2h0.01 M0 -2h0.01 M6 -2h0.01',
-    next:      'M-8 -6a5 5 0 1 0 0.01 0 M-16 12c1 -7 15 -7 16 0 M3 -12h11v9h-6l-3 3v-3h-2z'
+    next:      'M0 -12 A12 12 0 1 1 0 12 A12 12 0 1 1 0 -12 M0 -12 V12 M3 -5h6 M3 0.5h7 M3 6h5'
   };
   var eras = [[70, 'Mainframes', 'mainframe'], [260, 'Desktop and GUI', 'desktop'], [450, 'Mobile and touch', 'mobile'],
-              [640, 'Wearables and biosignals', 'wearable'], [830, 'LLM assistants', 'chat'], [1030, 'Next', 'next']];
+              [640, 'Wearables and biosignals', 'wearable'], [830, 'LLM assistants', 'chat'], [990, 'Embodied intelligence', 'next']];
   el('line', { x1: 40, x2: 1070, y1: BOTTOM, y2: BOTTOM, stroke: AXIS, 'stroke-width': 1 });
   eras.forEach(function (e) {
     var isNext = e[2] === 'next';
@@ -543,15 +611,15 @@ footer .inner { max-width: 72rem; margin: 0 auto; display: flex; flex-wrap: wrap
   text(830, 225, 'trust, empathy, agency', { 'text-anchor': 'middle' }, gap);
 
   // Open question: re-coupling into embodied human-AI symbiosis
-  var f1 = el('path', { d: 'M830 58 C900 50 960 46 1010 44', fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
-  var f2 = el('path', { d: 'M830 180 C900 170 950 80 1010 52', fill: 'none', stroke: ROSE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
+  var f1 = el('path', { d: 'M830 58 C895 50 945 46 970 44', fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
+  var f2 = el('path', { d: 'M830 180 C890 170 935 80 970 50', fill: 'none', stroke: ROSE, 'stroke-width': 2.5, 'stroke-dasharray': '6 7', 'stroke-linecap': 'round' });
   var q = el('g', {});
-  el('circle', { cx: 1030, cy: 48, r: 17, fill: 'none', stroke: YELLOW, 'stroke-width': 2 }, q);
-  text(1030, 54, '?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 18, 'font-weight': 700 }, q);
+  el('circle', { cx: 990, cy: 44, r: 17, fill: 'none', stroke: YELLOW, 'stroke-width': 2 }, q);
+  text(990, 50, '?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 18, 'font-weight': 700 }, q);
   var qLabel = el('g', {});
-  text(1030, 94, 'Re-coupling?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 16, 'font-weight': 700 }, qLabel);
-  text(1030, 113, 'embodied human-AI', { 'text-anchor': 'middle' }, qLabel);
-  text(1030, 130, 'symbiosis', { 'text-anchor': 'middle' }, qLabel);
+  text(990, 94, 'Re-coupling?', { 'text-anchor': 'middle', fill: YELLOW, 'font-size': 16, 'font-weight': 700 }, qLabel);
+  text(990, 113, 'embodied human-AI', { 'text-anchor': 'middle' }, qLabel);
+  text(990, 130, 'symbiosis', { 'text-anchor': 'middle' }, qLabel);
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !cogPath.getTotalLength) return;
